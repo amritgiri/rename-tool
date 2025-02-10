@@ -38,4 +38,7 @@ The tool will first check if the directory provided is valid or not. If it is, t
 
 If the directory is not available or not provided then it throws an error.
 
-
+# Uninstall 
+```
+sudo apt remove rename-tool
+```
