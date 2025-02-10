@@ -1,15 +1,15 @@
 # rename-tool
 A tool to rename bunch of files inside a folder having same extension within a second on a count basis.
 # Install
+You can download the `.deb` and then run command
+```
+sudo dpkg -i rename-tool-1.0.deb
+```
 You can clone the repository
 ```
 git clone https://github.com/amritgiri/rename-tool.git
 cd rename-tool
 chmod +x rename-tool
-```
-You can download the `.deb` and then run command
-```
-sudo dpkg -i rename-tool-1.0.deb
 ```
 
 # Usage
