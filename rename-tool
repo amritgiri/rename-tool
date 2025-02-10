@@ -1,0 +1,79 @@
+#!/bin/bash
+
+# this script renames the bunch of file in the provided directory
+
+usage() {
+  echo "Usage: rename-tool -d <directory>"
+  echo "Options:"
+  echo " -d             Specify the Directory containing files to rename"
+  echo " -v             Enable verbose mode to show renaming process"
+  echo " -h             Display this help message"
+  exit 1
+}
+
+# default verbose off
+verbose=false
+
+# Parse command-line options
+while getopts "d:vh" opt; do 
+  case $opt in 
+    d) directory="$OPTARG" ;;
+    v) verbose=true;;
+    h) usage ;;
+    \?) echo "Invalid option. Use -h for help." >&2; exit 1 ;;
+  esac
+done
+
+#Check if directory is provided
+if [ -z "$directory" ]; then
+  echo "Error: Directory not provided"
+  usage
+fi 
+
+#check if directory exists
+if [ ! -d "$directory" ]; then
+  echo "Error: Directory does not exist"
+  exit 1
+fi 
+echo "Checking file extensions in directory: $directory"
+
+# Identify the unique file extensions in the directory
+
+first_extension=""
+for file in "$directory"/*; do 
+  if [ -f "$file" ]; then
+    extension="${file##*.}" # Get the file extension
+
+    if [ -z "$first_extension" ]; then
+      first_extension="$extension"
+    elif [ "$first_extension" != "$extension" ]; then
+      echo "Error: Files in the directory have different extensions"
+      exit 1
+    fi
+  fi
+done
+
+# If all files have the same extension, prceed with renaming
+echo "Renaming files in directory: $directory"
+
+# Example operation: Rename files in the folder
+count=1
+
+for file in "$directory"/*; do 
+  if [ -f "$file" ]; then
+    new_filename="$count.$first_extension"
+
+    if [ "$verbose" = true ]; then
+      echo "Renaming '$file' -> '$directory/$new_filename'"
+    fi
+
+    mv "$file" "$directory/$new_filename"
+    count=$((count+1))
+  fi
+done
+
+echo "Files renamed successfully"
+
+
+
+
