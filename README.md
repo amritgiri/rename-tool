@@ -14,10 +14,12 @@ chmod +x rename-tool
 
 # Usage
 ```
-Usage: ./rename-tool -d <directory>
+Usage: rename-tool -d <directory>
 Options:
- -d <directory>  Specify the Directory containing files to rename
+ -d             Specify the Directory containing files to rename
+ -v             Enable verbose mode to show renaming process
  -h             Display this help message
+ --version      Show the tool's version.
 ```
 
 # Example
@@ -34,6 +36,9 @@ rename-tool -d /path/to/directory
 
 The tool will first check if the directory provided is valid or not. If it is, then it will just recursively rename the files inside the directory.
 
-If directory is not available or not provided then it throws error.
+If the directory is not available or not provided then it throws an error.
 
-
+# Uninstall 
+```
+sudo apt remove rename-tool
+```
