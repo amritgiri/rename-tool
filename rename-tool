@@ -2,17 +2,32 @@
 
 # this script renames the bunch of file in the provided directory
 
+VERSION="1.0.0"
+
 usage() {
-  echo "Usage: rename-tool -d <directory>"
+  echo "Usage: rename-tool -d <directory> -v"
   echo "Options:"
   echo " -d             Specify the Directory containing files to rename"
   echo " -v             Enable verbose mode to show renaming process"
   echo " -h             Display this help message"
+  echo " --version      Show the tool's version."
   exit 1
 }
 
 # default verbose off
 verbose=false
+
+
+# Support for long options (--version)
+for arg in "$@"; do
+  case "$arg" in
+    --version)
+      echo "rename-tool version $VERSION"
+      exit 0
+      ;;
+  esac
+done
+
 
 # Parse command-line options
 while getopts "d:vh" opt; do 
